@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Universitet | Ustozlar</title>
+</head>
+<body>
+    <h1>Ustozlar Ro'yxati</h1>
+    <hr>
+    <a href="/">Bosh Sahifa</a>
+
+    {% for ustoz in ustozlar %}
+        <p>
+            {{ forloop.counter }}.
+            <a href="/ustozlar/{{ ustoz.id }}/">
+                {{ ustoz.ism }}
+            </a>
+            <a href="/ustozlar/{{ ustoz.id }}/delete/">
+                <button>O'chirish</button>
+            </a>
+        </p>
+    {% endfor %}
+</body>
+</html>

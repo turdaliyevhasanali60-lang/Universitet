@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Universitet | Yo'nalishlar Ro'yhat</title>
+</head>
+<body>
+    <h1>Yo'nalishlar ro'yxati</h1>
+    <hr>
+    <a href="/">Bosh sahifa</a>
+    {% for yonalish in yonalishlar %}
+    <p>
+        {{forloop.counter }}.
+        <a href="/yona lishlar/{{ yonalish.id }}/">
+            {{ yonalish.nom }}
+            </a>
+        <a href="/yonalishlar/{{yonalish.id}}/delete/">
+            <button>O'chirish</button>
+        </a>
+        {% endfor %}
+        <br>
+         </p>
+</body>
+</html>

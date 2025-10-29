@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Universitet | Fanlar</title>
+</head>
+<body>
+    <h1>Fanlar Ro'yxati</h1>
+    <hr>
+
+    <form method="get">
+        <input type="text" name="search" placeholder="Nom bo'yicha .."
+               {% if search %}value="{{ search }}"{% endif %}>
+        <button type="submit">Qidirish</button>
+    </form>
+
+    <a href="/">Bosh Sahifa</a>
+
+    {% for fan in fanlar %}
+        <p>
+            {{ forloop.counter }}.
+            <a href="/fanlar/{{ fan.id }}/">
+                {{ fan.nom }}
+            </a>
+            <a href="/fanlar/{{ fan.id }}/delete/">
+                <button>O'chirish</button>
+            </a>
+        </p>
+    {% endfor %}
+</body>
+</html>
