@@ -20,5 +20,22 @@
         {% endfor %}
         <br>
          </p>
+
+    <hr>
+<h3>Yonalish Qo'shish</h3>
+    <br><br>
+
+<form method="post">
+        {% csrf_token %}
+        <label for="name">Nomi:</label>
+        <input type="text" name="nom" id="name" required>
+        <br><br>
+
+        <label for="active">Aktiv</label>
+        <input type="checkbox" name="aktiv" id="active">
+        <br><br>
+
+    <button>Yo'nalish Qo'shish</button>
+    </form>
 </body>
 </html>

@@ -27,5 +27,28 @@
             </a>
         </p>
     {% endfor %}
+    <br><br>
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="name">Nomi:</label>
+        <input type="text" name="nom" id="name" required>
+        <br><br>
+
+        <label for="main">Asosiy</label>
+        <input type="checkbox" name="asosiy" id="main">
+        <br><br>
+
+        <label for="major">Yo'nalish</label>
+        <select name="yonalish" id="major">
+            {% for yonalish in yonalishlar %}
+            <option value="{{ yonalish.id }}">{{yonalish.nom}}</option>
+            {% endfor %}
+
+        </select>
+        <br><br>
+
+    <button>Fan Qo'shish</button>
+    </form>
 </body>
 </html>
