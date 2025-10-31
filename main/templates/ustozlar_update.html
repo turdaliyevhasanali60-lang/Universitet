@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Universitet | Ustozlar</title>
+</head>
+<body>
+    <h3>{{ ustoz.ism }}ni ma'lumotlarini o'zgartirish</h3>
+    <hr>
+    <p>
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Ism: </label>
+        <input type="text" name="ism" id="name" value="{{ustoz.ism}}"><br><br>
+        <label for="age">Yosh: </label>
+        <input type="number" name="yosh" id="age" value="{{ustoz.yosh}}"><br><br>
+        <label for="gender">Jins</label>
+        <select name="jins" id="gender">
+            <option value="Ayol" {% if ustoz.jins == "Ayol" %}selected{% endif %}>Ayol</option>
+            <option value="Erkak" {% if ustoz.jins == "Erkak" %}selected{% endif %}>Erkak</option>
+        </select><br><br>
+        <label for="degree">Daraja</label>
+        <select name="daraja" id="degree">
+        <option value="Bakalavr" {% if ustoz.daraja == "Bakalavr" %}selected{% endif %}>Bakalavr</option>
+        <option value="Magistr" {% if ustoz.daraja == "Magistr" %}selected{% endif %}>Magistr</option>
+        </select><br><br>
+        <label for="subject">Fan</label>
+        <select name="fan" id="subject">
+            {% for fan in fanlar %}
+            <option value="{{fan.id}}"
+            {% if ustoz.fan.id == fan.id %}selected{% endif %}>
+                {{fan.nom}}
+            </option>
+            {% endfor %}
+
+        </select>
+                    <br><br>
+        <button>Yangilash</button>
+    </form>
+    </p>
+</body>
+</html>

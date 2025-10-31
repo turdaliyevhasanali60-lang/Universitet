@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fan Yangilash</title>
+</head>
+<body>
+    <h1>Fan ma'lumotlarini yangilash</h1>
+    <hr>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="name">Nomi:</label>
+        <input type="text" name="nom" id="name" value="{{ fan.nom }}" required>
+        <br><br>
+
+        <label for="main">Asosiy:</label>
+        <input type="checkbox" name="asosiy" id="main" {% if fan.asosiy %}checked{% endif %}>
+        <br><br>
+
+        <label for="Major">Yo'nalish:</label>
+        <select name="yonalish" id="Major">
+            {% for yonalish in yonalishlar %}
+                <option value="{{ yonalish.id }}"
+                    {% if fan.yonalish.id = yonalish.id %}selected{% endif %}>
+                    {{ yonalish.nom }}
+                </option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <button type="submit">Saqlash</button>
+    </form>
+
+    <br>
+    <a href="/fanlar/">Fanlar ro'yxatiga qaytish</a>
+</body>
+</html>

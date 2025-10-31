@@ -25,6 +25,9 @@
             <a href="/fanlar/{{ fan.id }}/delete/">
                 <button>O'chirish</button>
             </a>
+            <a href="/fanlar/{{ fan.id }}/update/">
+                <button>Yangilash</button>
+            </a>
         </p>
     {% endfor %}
     <br><br>
@@ -32,19 +35,21 @@
         {% csrf_token %}
 
         <label for="name">Nomi:</label>
-        <input type="text" name="nom" id="name" required>
+        <input type="text" name="nom" id="name" value="{{fan.nom}}" required>
         <br><br>
 
         <label for="main">Asosiy</label>
-        <input type="checkbox" name="asosiy" id="main">
+        <input type="checkbox" name="asosiy" id="main" value="{{fan.asosiy}} {% if fan.asosiy %}checked{% endif %}>
         <br><br>
 
-        <label for="major">Yo'nalish</label>
-        <select name="yonalish" id="major">
+        <label for="Major">Yo'nalish</label>
+        <select name="yonalish" id="Major">
             {% for yonalish in yonalishlar %}
-            <option value="{{ yonalish.id }}">{{yonalish.nom}}</option>
+                <option value="{{ yonalish.id }}"
+                    {% if fan.yonalish.id == yonalish.id %}selected{% endif %}>
+                    {{ yonalish.nom }}
+                </option>
             {% endfor %}
-
         </select>
         <br><br>
 

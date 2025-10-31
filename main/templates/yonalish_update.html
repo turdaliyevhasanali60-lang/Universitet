@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Universitet | Yonalishlar</title>
+</head>
+<body>
+    <h3>Universitet | Yonalishlar</h3>
+    <p>
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="name">Nom: </label>
+        <input type="text" name="nom" id="name" value="{{yonalish.nom}}"><br><br>
+
+        <label for="Active">Aktiv</label>
+        <input type="checkbox" name="aktiv" id="Active" {% if yonalish.aktiv %}checked{% endif %}>
+        <br><br>
+        <button>Yangilash</button>
+    </form>
+    </p>
+</body>
+</html>
