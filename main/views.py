@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import datetime
 from .models import *
+from .forms import *
+
 
 def index(request):
     context = {
@@ -10,12 +12,18 @@ def index(request):
     return render(request, 'index.html', context)
 
 def fanlar_view(request):
+    # if request.method == "POST":
+    #     Fan.objects.create(
+    #         nom = request.POST.get("nom"),
+    #         asosiy = request.POST.get("asosiy") == 'on',
+    #         yonalish_id = request.POST.get("yonalish")
+    #     )
+    form = FanForm()
     if request.method == "POST":
-        Fan.objects.create(
-            nom = request.POST.get("nom"),
-            asosiy = request.POST.get("asosiy") == 'on',
-            yonalish_id = request.POST.get("yonalish")
-        )
+        form_data = FanForm(request.POST)
+        if form_data.is_valid():
+            form_data.save()
+        return redirect('/fanlar/')
 
     yonalishlar = Yonalish.objects.all()
     fanlar = Fan.objects.all()
@@ -27,6 +35,7 @@ def fanlar_view(request):
         "fanlar": fanlar,
         "search": search,
         'yonalishlar': yonalishlar,
+        "form": form,
     }
     return render(request, 'fanlar.html', context)
 
@@ -56,18 +65,26 @@ def fan_delete_view(request, fan_id):
     return redirect('/fanlar/')
 
 def yonalishlar_view(request):
+    yonalishlar = Yonalish.objects.all()
+    # if request.method == "POST":
+    #     Yonalish.objects.create(
+    #         nom = request.POST.get("nom"),
+    #         aktiv = request.POST.get("aktiv") == 'on',
+    #     )
+    #     return redirect('/yonalishlar/')
+
+    form = YonalishForm()
     if request.method == "POST":
-        Yonalish.objects.create(
-            nom = request.POST.get("nom"),
-            aktiv = request.POST.get("aktiv") == 'on',
-        )
+        form_data = YonalishForm(request.POST)
+        if form_data.is_valid():
+            form_data.save()
         return redirect('/yonalishlar/')
 
 
-    yonalishlar = Yonalish.objects.all()
+
     context = {
         "yonalishlar": yonalishlar,
-
+        'form': form,
     }
     return render(request, 'yonalishlar.html', context)
 
@@ -96,25 +113,21 @@ def yonalish_delete_confirm_view(request, yonalish_id):
     return render(request, 'yonalish_delete_confirm.html', context)
 
 def ustozlar_view(request):
+    form = UstozForm()
     if request.method == "POST":
-        fan_id = request.POST.get("fan")
-        fan = Fan.objects.get(id=fan_id)
-        Ustoz.objects.create(
-            ism = request.POST.get("ism"),
-            yosh = request.POST.get("yosh"),
-            jins = request.POST.get("jins"),
-            daraja = request.POST.get("daraja"),
-            fan = fan,
-        )
+        form_data = UstozForm(request.POST)
+        if form_data.is_valid():
+            form_data.save()
         return redirect('/ustozlar/')
-    ustozlar = Ustoz.objects.all()
     fanlar = Fan.objects.all()
-
+    ustozlar = Ustoz.objects.all()
     context = {
         "ustozlar": ustozlar,
+        "form": form,
         "fanlar": fanlar,
     }
     return render(request, 'ustozlar.html', context)
+
 
 def ustozlar_update_view(request, ustoz_id):
     ustoz = Ustoz.objects.get(id=ustoz_id)

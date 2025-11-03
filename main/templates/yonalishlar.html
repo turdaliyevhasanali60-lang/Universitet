@@ -40,5 +40,12 @@
 
     <button>Yo'nalish Qo'shish</button>
     </form>
+    <hr>
+<h3>Yonalish Qo'shish</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>Qo'shish</button>
+    </form>
 </body>
 </html>
